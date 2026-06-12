@@ -1,0 +1,3193 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap");
+
+/* ==========================================================================
+   🌿 LIVING RAINFOREST — DESIGN SYSTEM
+   An enchanted forest where your second brain grows among ancient trees.
+   ========================================================================== */
+
+:root {
+  /* Typography */
+  --font-title: "Playfair Display", Georgia, serif;
+  --font-body: "Quicksand", "Segoe UI", sans-serif;
+
+  /* ── Core Palette ── */
+  --ivory: #faf4e8;
+  --ivory-warm: #f5ecd7;
+  --parchment: #f0e6d0;
+  --bark: #7f5539;
+  --bark-deep: #5c3d2e;
+  --bark-light: #9c6644;
+  --sage: #6b8f71;
+  --sage-light: #8fb996;
+  --sage-muted: #a8c5a0;
+  --amber: #e9a545;
+  --amber-glow: #f4c066;
+  --moss: #4a7c59;
+  --moss-deep: #2d5a3e;
+  --deep-forest: #2d4a3e;
+  --canopy-shadow: #1b3a2a;
+  --fern: #6da67a;
+  --dewdrop: #7ec8c8;
+  --ladybug: #c44536;
+  --berry: #9d4edd;
+  --cream-white: #fffdf7;
+
+  /* ── Semantic Mappings ── */
+  --bg-main: var(--ivory);
+  --bg-sidebar: var(--bark);
+  --bg-card: rgba(240, 230, 208, 0.65);
+  --bg-card-hover: rgba(240, 230, 208, 0.88);
+  --bg-input: var(--cream-white);
+  --bg-card-solid: #f0e6d0;
+
+  --border-color: rgba(107, 143, 113, 0.25);
+  --border-vine: rgba(74, 124, 89, 0.35);
+  --border-hover: rgba(74, 124, 89, 0.6);
+
+  --primary: var(--amber);
+  --primary-rgb: 233, 165, 69;
+  --secondary: var(--dewdrop);
+  --secondary-rgb: 126, 200, 200;
+  --success: var(--sage);
+  --success-rgb: 107, 143, 113;
+  --warning: var(--amber-glow);
+  --danger: var(--ladybug);
+
+  --text-main: #2c3e2d;
+  --text-muted: #5a6e5c;
+  --text-dim: #8a9b8c;
+  --text-light: rgba(255, 253, 247, 0.9);
+  --text-bark: #d4c4a8;
+
+  /* ── Gradients ── */
+  --grad-bark: linear-gradient(
+    180deg,
+    #6b4226 0%,
+    #7f5539 25%,
+    #5c3d2e 50%,
+    #7f5539 75%,
+    #6b4226 100%
+  );
+  --grad-bark-horizontal: linear-gradient(
+    90deg,
+    #5c3d2e 0%,
+    #7f5539 40%,
+    #6b4226 60%,
+    #7f5539 100%
+  );
+  --grad-forest-mist: linear-gradient(
+    180deg,
+    rgba(45, 74, 62, 0.03) 0%,
+    rgba(107, 143, 113, 0.05) 40%,
+    rgba(168, 197, 160, 0.08) 70%,
+    rgba(250, 244, 232, 0) 100%
+  );
+  --grad-amber: linear-gradient(135deg, #e9a545 0%, #d4882a 100%);
+  --grad-sage: linear-gradient(135deg, #6b8f71 0%, #4a7c59 100%);
+  --grad-parchment: linear-gradient(145deg, #f5ecd7 0%, #e8dcc6 100%);
+  --grad-forest-floor: linear-gradient(
+    180deg,
+    rgba(45, 90, 62, 0.06) 0%,
+    transparent 100%
+  );
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 2px 8px rgba(45, 74, 62, 0.06);
+  --shadow-md: 0 6px 20px rgba(45, 74, 62, 0.08);
+  --shadow-lg: 0 12px 40px rgba(45, 74, 62, 0.12);
+  --shadow-bark:
+    inset 2px 0 8px rgba(0, 0, 0, 0.15), inset -2px 0 8px rgba(0, 0, 0, 0.1);
+  --shadow-parchment:
+    0 4px 16px rgba(92, 61, 46, 0.08), 0 1px 3px rgba(92, 61, 46, 0.04);
+  --shadow-glow-amber: 0 0 20px rgba(233, 165, 69, 0.25);
+  --shadow-glow-sage: 0 0 15px rgba(107, 143, 113, 0.2);
+
+  /* ── Layout ── */
+  --sidebar-width: 260px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+  --radius-organic: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  --radius-full: 9999px;
+
+  /* ── Transitions ── */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ==========================================================================
+   RESET & DOCUMENT BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Misty forest backdrop */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    /* Canopy light rays from top */
+    radial-gradient(
+      ellipse 60% 30% at 70% 0%,
+      rgba(168, 197, 160, 0.12) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 25% at 30% 0%,
+      rgba(233, 165, 69, 0.06) 0%,
+      transparent 60%
+    ),
+    /* Distant tree silhouettes */
+    radial-gradient(
+        ellipse 8% 80% at 15% 50%,
+        rgba(45, 74, 62, 0.04) 0%,
+        transparent 100%
+      ),
+    radial-gradient(
+      ellipse 6% 70% at 35% 55%,
+      rgba(45, 74, 62, 0.03) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 10% 90% at 75% 45%,
+      rgba(45, 74, 62, 0.035) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 7% 75% at 90% 50%,
+      rgba(45, 74, 62, 0.04) 0%,
+      transparent 100%
+    ),
+    /* Forest floor mist */
+    linear-gradient(0deg, rgba(168, 197, 160, 0.08) 0%, transparent 25%),
+    /* Warm ambient */ var(--bg-main);
+  z-index: -1;
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+}
+
+a {
+  color: var(--moss);
+  text-decoration: none;
+}
+
+/* ── Organic Scrollbars ── */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(107, 143, 113, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(127, 85, 57, 0.25);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 85, 57, 0.45);
+}
+
+/* ==========================================================================
+   🌿 PARCHMENT CARD SYSTEM
+   Replaces flat .glass cards with organic, aged-paper panels
+   ========================================================================== */
+
+.glass,
+.parchment-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-parchment);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Leaf corner accent */
+.glass::before,
+.parchment-card::before {
+  content: "🍃";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-size: 1.4rem;
+  opacity: 0.18;
+  transform: rotate(25deg);
+  pointer-events: none;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.glass:hover,
+.parchment-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.glass:hover::before,
+.parchment-card:hover::before {
+  opacity: 0.35;
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Vine border accent on left */
+.glass::after,
+.parchment-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--grad-sage);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  border-radius: 3px 0 0 3px;
+}
+
+.glass:hover::after,
+.parchment-card:hover::after {
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   🌳 LAYOUT STRUCTURE
+   ========================================================================== */
+
+.app-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ── Tree Trunk Sidebar ── */
+.sidebar {
+  width: var(--sidebar-width);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: var(--grad-bark);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.25rem;
+  z-index: 200;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Bark texture via layered shadows */
+  box-shadow:
+    var(--shadow-bark),
+    4px 0 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Bark grain texture overlay */
+.sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      rgba(0, 0, 0, 0.03) 2px,
+      transparent 4px,
+      rgba(255, 255, 255, 0.02) 6px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(0, 0, 0, 0.015) 30px,
+      transparent 60px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Moss gradient at bottom */
+.sidebar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(
+    0deg,
+    rgba(74, 124, 89, 0.15) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sidebar > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Brand / Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 253, 247, 0.1);
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--grad-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 15px rgba(233, 165, 69, 0.35);
+  animation: brand-glow 3s infinite ease-in-out;
+}
+
+@keyframes brand-glow {
+  0%,
+  100% {
+    box-shadow: 0 4px 15px rgba(233, 165, 69, 0.35);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(233, 165, 69, 0.55);
+  }
+}
+
+.brand-name {
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--ivory);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-grow: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  color: var(--text-bark);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-link svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+  color: var(--text-bark);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.nav-link:hover {
+  color: var(--ivory);
+  background: rgba(255, 253, 247, 0.08);
+}
+
+.nav-link:hover svg {
+  opacity: 1;
+  transform: translateX(3px);
+  color: var(--amber-glow);
+}
+
+.nav-link.active {
+  color: var(--ivory);
+  background: rgba(233, 165, 69, 0.15);
+  border-left: 3px solid var(--amber);
+  box-shadow: inset 0 0 20px rgba(233, 165, 69, 0.05);
+}
+
+.nav-link.active svg {
+  color: var(--amber);
+  opacity: 1;
+}
+
+/* Branch decoration on active nav */
+.nav-link.active::after {
+  content: "🌿";
+  position: absolute;
+  right: 8px;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 253, 247, 0.08);
+  padding-top: 1.25rem;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 253, 247, 0.06);
+  border: 1px solid rgba(255, 253, 247, 0.1);
+  color: var(--text-bark);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: default;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--grad-sage);
+  border: 2px solid rgba(255, 253, 247, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ivory);
+}
+
+.user-title {
+  font-size: 0.72rem;
+  color: var(--text-bark);
+  opacity: 0.7;
+}
+
+/* ── Main Content ── */
+.main-viewport {
+  flex-grow: 1;
+  padding: 0;
+  margin-left: var(--sidebar-width);
+  overflow-y: auto;
+  max-width: calc(1400px + var(--sidebar-width));
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.view-section {
+  padding: 2.5rem 3rem;
+  min-height: 100vh;
+  position: relative;
+  animation: view-enter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.acorn-vault-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.jars-beetle-stage {
+  position: relative;
+}
+
+.barnaby-scurry {
+  position: absolute;
+  z-index: 100;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes view-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   WHIMSICAL ANIMATIONS
+   ========================================================================== */
+
+@keyframes firefly-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+}
+
+@keyframes snail-crawl {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px) scaleY(0.97);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glowing-light {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(233, 165, 69, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(233, 165, 69, 0.55);
+  }
+}
+
+@keyframes flutter {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+@keyframes vine-grow {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dewdrop-shimmer {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes parchment-unfurl {
+  from {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-8deg) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0) translateY(0);
+  }
+}
+
+.firefly-glow {
+  animation: glowing-light 2.5s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   📊 DASHBOARD HOME VIEW
+   ========================================================================== */
+
+.view-header {
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.view-header h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+  color: var(--deep-forest);
+  position: relative;
+  display: inline-block;
+}
+
+/* Decorative underline vine */
+.view-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--grad-amber);
+  border-radius: 3px;
+}
+
+.view-header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* ── KPI Stat Cards ── */
+.grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.card-stat {
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-parchment);
+  transition: all var(--transition-fast);
+}
+
+.card-stat::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.card-stat::after {
+  content: none;
+}
+
+.card-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-stat.stat-primary::before {
+  background: var(--grad-amber);
+}
+.card-stat.stat-secondary::before {
+  background: linear-gradient(90deg, var(--dewdrop), var(--sage-light));
+}
+.card-stat.stat-success::before {
+  background: var(--grad-sage);
+}
+.card-stat.stat-warning::before {
+  background: linear-gradient(90deg, var(--amber-glow), var(--berry));
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+}
+
+.stat-icon {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.stat-value {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+  color: var(--deep-forest);
+}
+
+.stat-footer {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ── Dashboard Main Grid ── */
+.grid-dashboard-main {
+  display: grid;
+  grid-template-columns: 1.7fr 1.3fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.panel-title {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--deep-forest);
+}
+
+.panel {
+  padding: 1.5rem;
+}
+
+/* ── Awareness / Presence Section ── */
+.awareness-hero {
+  background: linear-gradient(
+    145deg,
+    rgba(107, 143, 113, 0.08) 0%,
+    rgba(233, 165, 69, 0.06) 50%,
+    rgba(127, 85, 57, 0.04) 100%
+  );
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.awareness-avatar-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brain-glow {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--grad-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  box-shadow: var(--shadow-glow-amber);
+  animation: firefly-bob 3.5s infinite ease-in-out;
+}
+
+.awareness-rating {
+  font-weight: 800;
+  font-size: 1.2rem;
+  font-family: var(--font-title);
+  color: var(--text-main);
+}
+
+.awareness-content {
+  flex-grow: 1;
+}
+
+.awareness-quote {
+  font-style: italic;
+  font-family: var(--font-title);
+  margin-bottom: 0.75rem;
+  color: var(--deep-forest);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.awareness-analysis {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.awareness-slider-card {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.range-container {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 1rem 0;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(107, 143, 113, 0.2) 0%,
+    rgba(233, 165, 69, 0.3) 100%
+  );
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--grad-amber);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(233, 165, 69, 0.4);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   📋 TODO / TASK ITEMS
+   ========================================================================== */
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-sm);
+  background: var(--cream-white);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.todo-item:hover {
+  border-color: var(--border-hover);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.todo-item.completed {
+  opacity: 0.5;
+}
+
+.todo-item.completed .todo-label {
+  text-decoration: line-through;
+  color: var(--text-dim);
+}
+
+.todo-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.todo-label {
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.todo-checkbox svg {
+  display: none;
+  width: 14px;
+  height: 14px;
+  color: #ffffff;
+  stroke-width: 4px;
+}
+
+.todo-checkbox.checked {
+  background: var(--sage);
+  border-color: var(--sage);
+}
+
+.todo-checkbox.checked svg {
+  display: block;
+}
+
+.todo-delete {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  padding: 4px;
+}
+
+.todo-delete:hover {
+  color: var(--danger);
+}
+
+/* ==========================================================================
+   🐌 WELLNESS WIDGETS
+   ========================================================================== */
+
+.wellness-card {
+  padding: 1.5rem;
+}
+
+/* Water Stalk */
+.water-snail-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.75rem;
+}
+
+.water-stem-path {
+  position: relative;
+  width: 50px;
+  height: 200px;
+  background: rgba(107, 143, 113, 0.06);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--border-vine);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  box-shadow: inset 0 2px 8px rgba(74, 124, 89, 0.1);
+}
+
+.water-stem-fill {
+  background: linear-gradient(0deg, var(--dewdrop) 0%, var(--sage-light) 100%);
+  width: 100%;
+  transition: height var(--transition-slow);
+  border-radius: 0 0 var(--radius-full) var(--radius-full);
+}
+
+.snail-avatar {
+  position: absolute;
+  font-size: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  transition: bottom var(--transition-slow);
+  animation: snail-crawl 2.5s infinite ease-in-out;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.counter-value {
+  font-family: var(--font-title);
+  font-weight: 800;
+  color: var(--deep-forest);
+}
+
+.counter-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-vine);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--text-muted);
+}
+
+.btn-icon:hover {
+  background: rgba(107, 143, 113, 0.08);
+  border-color: var(--sage);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   💰 FINANCE / ACORN VAULT
+   ========================================================================== */
+
+.finance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 1.5rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+
+.tag-essential {
+  background: rgba(107, 143, 113, 0.12);
+  color: var(--sage);
+}
+.tag-joyful {
+  background: rgba(126, 200, 200, 0.15);
+  color: #4d9e9e;
+}
+.tag-impulsive {
+  background: rgba(196, 69, 54, 0.1);
+  color: var(--ladybug);
+}
+
+/* ==========================================================================
+   ⏱ POMODORO / FIREFLY JAR
+   ========================================================================== */
+
+.firefly-jar-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 1.25rem 0;
+}
+
+.jar-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 6px 15px rgba(45, 74, 62, 0.1));
+}
+
+.jar-glow-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  transform: translate(-50%, -40%);
+  filter: blur(14px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  pointer-events: none;
+}
+
+.jar-firefly {
+  position: absolute;
+  font-size: 1.6rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: firefly-bob 3s infinite ease-in-out;
+}
+
+/* ── Timer Controls ── */
+.timer-buttons {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.timer-mode {
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   🦋 ANALYTICS
+   ========================================================================== */
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.butterfly-fly {
+  font-size: 2.8rem;
+  display: inline-block;
+  animation: flutter 2.5s infinite ease-in-out;
+  filter: drop-shadow(0 4px 8px rgba(157, 78, 221, 0.2));
+}
+
+.cocoon-wrap {
+  animation: firefly-bob 4s infinite ease-in-out;
+}
+
+/* SVG Charts */
+.svg-chart {
+  max-width: 100%;
+  height: auto;
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  width: 100%;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+/* Correlation Insight Boxes */
+.correlation-box {
+  padding: 1.15rem;
+  border-left: 3px solid var(--sage);
+  background: rgba(107, 143, 113, 0.04);
+  border-radius: 4px 8px 8px 4px;
+  margin-bottom: 0.85rem;
+}
+
+.correlation-box h4 {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  color: var(--deep-forest);
+}
+
+.correlation-box p {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   📝 JOURNAL / COCOON REFLECTIONS
+   ========================================================================== */
+
+.journal-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+}
+
+.journal-editor-card {
+  padding: 1.5rem;
+}
+
+.journal-card {
+  padding: 1.25rem;
+  margin-bottom: 0.85rem;
+  animation: parchment-unfurl 0.5s ease-out;
+}
+
+.journal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.journal-body {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-weight: 500;
+}
+
+.journal-logs-container {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.caterpillar-avatar {
+  font-size: 2rem;
+  display: inline-block;
+  transition: transform 0.5s ease;
+}
+
+/* ==========================================================================
+   📜 TABLES
+   ========================================================================== */
+
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  background: var(--cream-white);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 0.85rem 1.15rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  font-family: var(--font-title);
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(107, 143, 113, 0.05);
+}
+
+td {
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: rgba(107, 143, 113, 0.02);
+}
+
+/* ==========================================================================
+   🔘 BUTTONS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.btn-primary {
+  background: var(--grad-amber);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(233, 165, 69, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(233, 165, 69, 0.45);
+}
+
+.btn-secondary {
+  background: var(--cream-white);
+  border: 1px solid var(--border-vine);
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: var(--ivory-warm);
+  border-color: var(--sage);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   📋 FORMS
+   ========================================================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.input-field,
+select,
+textarea {
+  width: 100%;
+  padding: 0.78rem 1.05rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: inset 0 1px 3px rgba(107, 143, 113, 0.04);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.input-field:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(107, 143, 113, 0.12);
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+/* ==========================================================================
+   💬 DIALOGS & MODALS
+   ========================================================================== */
+
+dialog {
+  position: fixed;
+  margin: auto;
+  border: none;
+  outline: none;
+  background: transparent;
+  z-index: 1000;
+  max-width: 500px;
+  width: 90%;
+  padding: 0;
+}
+
+.modal-content {
+  background: var(--cream-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+dialog,
+[popover] {
+  opacity: 0;
+  transform: scale(0.92) translateY(16px);
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-behavior: allow-discrete;
+}
+
+dialog[open],
+[popover]:popover-open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+}
+
+dialog::backdrop,
+[popover]::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  transition:
+    display 0.3s allow-discrete,
+    overlay 0.3s allow-discrete,
+    background-color 0.3s ease-out,
+    backdrop-filter 0.3s ease-out;
+}
+
+dialog[open]::backdrop,
+[popover]:popover-open::backdrop {
+  background-color: rgba(45, 74, 62, 0.35);
+  backdrop-filter: blur(6px);
+
+  @starting-style {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+  }
+}
+
+/* ==========================================================================
+   🎯 FILTER & TASK CONTROLS
+   ========================================================================== */
+
+.task-filters {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--cream-white);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--sage);
+  color: var(--text-main);
+  background: rgba(107, 143, 113, 0.05);
+}
+
+.filter-btn.active {
+  background: var(--grad-sage);
+  color: #ffffff;
+  border-color: var(--moss);
+  box-shadow: 0 2px 8px rgba(107, 143, 113, 0.25);
+}
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.5rem;
+}
+
+.pomodoro-card {
+  position: relative;
+}
+
+/* ==========================================================================
+   😊 MOOD PICKER
+   ========================================================================== */
+
+.mood-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mood-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-color);
+  background: var(--cream-white);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  min-width: 72px;
+}
+
+.mood-btn span:first-child {
+  font-size: 1.5rem;
+}
+
+.mood-btn:hover {
+  border-color: var(--sage);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.mood-btn.selected {
+  background: var(--grad-sage);
+  border-color: var(--moss);
+  color: #ffffff;
+  box-shadow: 0 3px 12px rgba(107, 143, 113, 0.25);
+}
+
+/* ==========================================================================
+   📱 RESPONSIVE — Mobile Forest Floor
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+
+  .app-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    border-right: none;
+    border-top: 1px solid rgba(255, 253, 247, 0.1);
+    padding: 0.35rem 0.75rem;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 300;
+    box-shadow: 0 -4px 20px rgba(45, 74, 62, 0.15);
+    background: var(--bark-deep);
+  }
+
+  .sidebar::before,
+  .sidebar::after {
+    display: none;
+  }
+
+  .brand,
+  .sidebar-footer,
+  .user-profile,
+  .theme-toggle-btn {
+    display: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0.15rem;
+  }
+
+  .nav-link {
+    flex-direction: column;
+    padding: 0.45rem 0.35rem;
+    font-size: 0.65rem;
+    gap: 0.2rem;
+    align-items: center;
+    border-radius: 8px;
+    border-left: none !important;
+  }
+
+  .nav-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-link.active {
+    border-left: none;
+    background: rgba(233, 165, 69, 0.2);
+    border-bottom: 2px solid var(--amber);
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+
+  .main-viewport {
+    margin-left: 0;
+    padding: 1.5rem 1.25rem 85px 1.25rem;
+  }
+
+  .view-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .grid-dashboard-main,
+  .finance-grid,
+  .tasks-grid,
+  .journal-layout,
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .card-stat {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .mood-picker {
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   🌰 ORGANIC PEBBLE CARD SYSTEM & BUDGET JARS
+   ========================================================================== */
+
+.pebble-panel-1,
+.pebble-panel-2,
+.pebble-panel-wide,
+.pebble-panel-records {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-parchment);
+  position: relative;
+  overflow: visible; /* Let ambient beetles splay over borders */
+  transition:
+    border-color var(--transition-fast),
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s ease;
+  padding: 1.5rem;
+}
+
+.pebble-panel-1 {
+  border-radius: 45px 85px 55px 75px / 50px 65px 75px 85px;
+}
+
+.pebble-panel-2 {
+  border-radius: 75px 50px 85px 60px / 65px 75px 55px 80px;
+}
+
+.pebble-panel-wide {
+  border-radius: 35px 45px 30px 40px / 30px 35px 25px 45px;
+}
+
+.pebble-panel-records {
+  border-radius: 40px 30px 45px 35px / 35px 40px 30px 45px;
+}
+
+/* Foliage/Pebble decorative corner indicators */
+.pebble-panel-1::before,
+.pebble-panel-2::before,
+.pebble-panel-wide::before,
+.pebble-panel-records::before {
+  content: "🍃";
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.3rem;
+  opacity: 0.16;
+  transform: rotate(20deg);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Hover Glowing & Tilting Animations */
+.pebble-panel-1:hover {
+  transform: translateY(-5px) scale(1.015) rotate(0.4deg);
+  box-shadow:
+    0 15px 35px rgba(143, 172, 142, 0.22),
+    inset 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.pebble-panel-2:hover {
+  border-color: rgba(229, 168, 85, 0.5);
+  transform: translateY(-5px) scale(1.015) rotate(-0.4deg);
+  box-shadow:
+    0 15px 35px rgba(229, 168, 85, 0.18),
+    inset 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.pebble-panel-wide:hover {
+  border-color: rgba(125, 227, 147, 0.5);
+  transform: translateY(-4px) scale(1.008) rotate(0.2deg);
+  box-shadow:
+    0 15px 35px rgba(125, 227, 147, 0.18),
+    inset 0 0 20px rgba(255, 255, 255, 0.45);
+}
+
+.pebble-panel-records:hover {
+  border-color: rgba(143, 172, 142, 0.5);
+  transform: translateY(-3px) scale(1.005) rotate(-0.2deg);
+  box-shadow:
+    0 12px 30px rgba(45, 74, 62, 0.15),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.pebble-panel-1:hover::before,
+.pebble-panel-2:hover::before,
+.pebble-panel-wide:hover::before,
+.pebble-panel-records:hover::before {
+  opacity: 0.35;
+  transform: rotate(10deg) scale(1.15);
+}
+
+/* --- Money Jars Container --- */
+.jars-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem 0;
+  flex-wrap: wrap;
+}
+
+/* --- Money Jar Structure --- */
+.money-jar {
+  width: 180px;
+  height: 260px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.money-jar:hover {
+  transform: scale(1.03);
+}
+
+/* Jar Cork Lid */
+.money-jar .jar-cork {
+  width: 86px;
+  height: 18px;
+  background: linear-gradient(
+    90deg,
+    #5d4037 0%,
+    #8d6e63 45%,
+    #a1887f 60%,
+    #5d4037 100%
+  );
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  position: relative;
+}
+
+/* Jar Neck */
+.money-jar .jar-neck {
+  width: 96px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.22);
+  border-left: 2px solid rgba(255, 255, 255, 0.4);
+  border-right: 2px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 9;
+  position: relative;
+  margin-top: -2px;
+}
+
+/* Jar Glass Body */
+.money-jar .jar-body {
+  width: 100%;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  border: 2.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 40px 40px 48px 48px / 35px 35px 44px 44px;
+  box-shadow:
+    inset 0 12px 18px rgba(255, 255, 255, 0.5),
+    inset 0 -12px 18px rgba(0, 0, 0, 0.15),
+    inset 12px 0 12px rgba(255, 255, 255, 0.18),
+    inset -12px 0 12px rgba(0, 0, 0, 0.07),
+    0 12px 28px rgba(45, 74, 62, 0.15);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: -2px;
+  z-index: 8;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.money-jar:hover .jar-body {
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    inset 0 15px 22px rgba(255, 255, 255, 0.65),
+    inset 0 -15px 22px rgba(0, 0, 0, 0.18),
+    0 16px 36px rgba(45, 74, 62, 0.22);
+}
+
+/* Glass glare reflection */
+.money-jar .jar-glare {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 14px;
+  height: 80%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 12;
+}
+
+/* Jar Liquid Fill */
+.money-jar .jar-liquid {
+  width: 100%;
+  position: relative;
+  transition: height 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  min-height: 0%;
+  max-height: 100%;
+  z-index: 7;
+}
+
+/* Animated liquid waves */
+.money-jar .jar-wave-1 {
+  position: absolute;
+  width: 250%;
+  height: 250px;
+  top: -240px;
+  left: -70%;
+  border-radius: 43%;
+  background: rgba(255, 255, 255, 0.14);
+  animation: rotate-wave 9s linear infinite;
+  pointer-events: none;
+}
+
+.money-jar .jar-wave-2 {
+  position: absolute;
+  width: 258%;
+  height: 250px;
+  top: -244px;
+  left: -74%;
+  border-radius: 40%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: rotate-wave 13s linear infinite;
+  pointer-events: none;
+}
+
+/* Float Particles */
+.money-jar .jar-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.money-jar .particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  animation: float-up 6s ease-in-out infinite;
+}
+
+/* Special Pebble Shapes for Pebble Jar */
+.money-jar .pebble-particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+  animation: float-up 8s ease-in-out infinite;
+}
+
+/* Special Seed Shapes for Seeds & Roots Jar */
+.money-jar .seed-particle {
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform: rotate(20deg);
+  animation: float-up 7s ease-in-out infinite;
+}
+
+/* Jar Labels & Overlay Content */
+.money-jar .jar-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  text-align: center;
+  padding: 1.5rem 0.5rem 1rem 0.5rem;
+  pointer-events: none;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.95),
+    0 2px 6px rgba(255, 255, 255, 0.6);
+}
+
+.money-jar .jar-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--deep-forest);
+  margin-bottom: 0.1rem;
+  letter-spacing: 0.01rem;
+}
+
+.money-jar .jar-sub {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #3e5a4e;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.04rem;
+}
+
+.money-jar .jar-amount {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #14281e;
+  line-height: 1.1;
+}
+
+.money-jar .jar-limit {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #3e5a4e;
+  margin-top: 0.1rem;
+}
+
+.money-jar .jar-status {
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 0.4rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 1px 3px rgba(45, 74, 62, 0.1);
+  color: var(--deep-forest);
+}
+
+.money-jar .jar-status.overdrawn {
+  background: rgba(230, 94, 94, 0.9);
+  color: #fff;
+  font-size: 0.65rem;
+  text-shadow: none;
+  font-weight: 700;
+  animation: jar-pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 2px 6px rgba(230, 94, 94, 0.4);
+}
+
+/* --- Acorn Coin Vault page backdrop --- */
+.main-viewport.main-coin-vault {
+  background: transparent;
+}
+
+.coin-vault-view {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100vh - 5rem);
+}
+
+.coin-vault-view .acorn-vault-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.coin-vault-view > .view-header,
+.coin-vault-view > .coin-vault-content {
+  position: relative;
+  z-index: 1;
+}
+
+.coin-vault-view .pebble-panel-1,
+.coin-vault-view .pebble-panel-2,
+.coin-vault-view .pebble-panel-wide,
+.coin-vault-view .pebble-panel-records {
+  background: rgba(240, 230, 208, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: none;
+}
+
+.coin-vault-view .pebble-panel-1,
+.coin-vault-view .pebble-panel-1:hover {
+  transform: translateY(-5px) scale(1.015) rotate(0.4deg);
+  box-shadow:
+    0 15px 35px rgba(143, 172, 142, 0.22),
+    inset 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.coin-vault-view .pebble-panel-2,
+.coin-vault-view .pebble-panel-2:hover {
+  border-color: rgba(229, 168, 85, 0.5);
+  transform: translateY(-5px) scale(1.015) rotate(-0.4deg);
+  box-shadow:
+    0 15px 35px rgba(229, 168, 85, 0.18),
+    inset 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.coin-vault-view .pebble-panel-wide,
+.coin-vault-view .pebble-panel-wide:hover {
+  border-color: rgba(125, 227, 147, 0.5);
+  transform: translateY(-4px) scale(1.008) rotate(0.2deg);
+  box-shadow:
+    0 15px 35px rgba(125, 227, 147, 0.18),
+    inset 0 0 20px rgba(255, 255, 255, 0.45);
+}
+
+.coin-vault-view .pebble-panel-records,
+.coin-vault-view .pebble-panel-records:hover {
+  border-color: rgba(143, 172, 142, 0.5);
+  transform: translateY(-3px) scale(1.005) rotate(-0.2deg);
+  box-shadow:
+    0 12px 30px rgba(45, 74, 62, 0.15),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.coin-vault-view .pebble-panel-1::before,
+.coin-vault-view .pebble-panel-2::before,
+.coin-vault-view .pebble-panel-wide::before,
+.coin-vault-view .pebble-panel-records::before,
+.coin-vault-view .pebble-panel-1:hover::before,
+.coin-vault-view .pebble-panel-2:hover::before,
+.coin-vault-view .pebble-panel-wide:hover::before,
+.coin-vault-view .pebble-panel-records:hover::before {
+  opacity: 0.35;
+  transform: rotate(10deg) scale(1.15);
+  transition: none;
+}
+
+/* Jar beetle staging */
+.money-jar-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.money-jar-wrap .jar-beetle {
+  position: absolute;
+  z-index: 25;
+  pointer-events: auto;
+}
+
+.jars-beetle-stage {
+  position: relative;
+  overflow: visible;
+}
+
+.jars-beetle-stage .barnaby-scurry {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  width: 56px;
+  height: 56px;
+  margin-top: -24px;
+  margin-left: -24px;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: auto;
+}
+
+.money-jar-wrap--nectar {
+  padding: 0 1.5rem;
+  margin: 0 0.25rem;
+}
+
+.coin-vault-view .jars-container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* ==========================================================================
+   🌿 WELLNESS & FOLIAGE HUB REVAMP
+   ========================================================================== */
+
+.main-viewport.main-wellness-hub {
+  background: transparent;
+}
+
+.wellness-view {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100vh - 5rem);
+  --text-main: var(--ivory);
+  --text-muted: var(--ivory-warm);
+  --text-dim: rgba(255, 255, 255, 0.7);
+  --text-bark: var(--ivory-warm);
+  color: var(--text-main);
+}
+
+.wellness-view h1,
+.wellness-view h2,
+.wellness-view h3,
+.wellness-view h4,
+.wellness-view label {
+  color: var(--text-main);
+}
+
+.wellness-view .wellness-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wellness-view > .view-header,
+.wellness-view > .wellness-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Translucent organic panels with glowing contour shadow effects - locked highlighted as default state */
+.wellness-view .pebble-panel-1 {
+  background: rgba(14, 30, 20, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(143, 172, 142, 0.6);
+  transform: translateY(-5px) scale(1.015) rotate(0.4deg);
+  box-shadow:
+    0 15px 35px rgba(143, 172, 142, 0.25),
+    inset 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+.wellness-view .pebble-panel-2 {
+  background: rgba(14, 30, 20, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(229, 168, 85, 0.5);
+  transform: translateY(-5px) scale(1.015) rotate(-0.4deg);
+  box-shadow:
+    0 15px 35px rgba(229, 168, 85, 0.22),
+    inset 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+.wellness-view .pebble-panel-wide {
+  background: rgba(14, 30, 20, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(125, 227, 147, 0.5);
+  transform: translateY(-4px) scale(1.008) rotate(0.2deg);
+  box-shadow:
+    0 15px 35px rgba(125, 227, 147, 0.22),
+    inset 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Maintain identical layout on hover to disable hover changes */
+.wellness-view .pebble-panel-1:hover {
+  transform: translateY(-5px) scale(1.015) rotate(0.4deg) !important;
+  box-shadow:
+    0 15px 35px rgba(143, 172, 142, 0.25),
+    inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(143, 172, 142, 0.6) !important;
+}
+
+.wellness-view .pebble-panel-2:hover {
+  transform: translateY(-5px) scale(1.015) rotate(-0.4deg) !important;
+  box-shadow:
+    0 15px 35px rgba(229, 168, 85, 0.22),
+    inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(229, 168, 85, 0.5) !important;
+}
+
+.wellness-view .pebble-panel-wide:hover {
+  transform: translateY(-4px) scale(1.008) rotate(0.2deg) !important;
+  box-shadow:
+    0 15px 35px rgba(125, 227, 147, 0.22),
+    inset 0 0 20px rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(125, 227, 147, 0.5) !important;
+}
+
+/* Default active corner leaf indicators */
+.wellness-view .pebble-panel-1::before,
+.wellness-view .pebble-panel-2::before,
+.wellness-view .pebble-panel-wide::before {
+  opacity: 0.35;
+  transform: rotate(10deg) scale(1.15);
+}
+
+/* Compact combined card design - Column stacked style */
+.compact-wellness-combined {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.combined-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Thin horizontal divider separating stacked sleep and mood sections */
+.combined-separator {
+  height: 1px;
+  width: 100%;
+  background: rgba(143, 172, 142, 0.2);
+  margin: 0.5rem 0;
+}
+
+@media (min-width: 900px) {
+  .compact-wellness-combined {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .combined-separator {
+    width: 100%;
+    height: 1px;
+    background: rgba(143, 172, 142, 0.2);
+    margin: 0.5rem 0;
+  }
+}
+
+/* Typography & Theme-complimentary Colors for readable contrast on dark BG */
+.wellness-view .view-header h2 {
+  color: var(--ivory) !important;
+  font-family: var(--font-title);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.wellness-view .view-header p {
+  color: #b0c2b2 !important;
+  font-size: 0.95rem;
+}
+
+.wellness-view .panel-title {
+  color: var(--text-bark) !important;
+  font-family: var(--font-title);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.wellness-view p,
+.wellness-view label {
+  color: #bdcfc0 !important;
+}
+
+.wellness-view .counter-value {
+  color: var(--ivory) !important;
+}
+
+/* Transparent inputs matching the glass theme with warm text */
+.wellness-view .input-field,
+.wellness-view select.input-field {
+  background: rgba(10, 24, 16, 0.65) !important;
+  border: 1px solid rgba(143, 172, 142, 0.4) !important;
+  color: var(--ivory) !important;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.wellness-view .input-field::placeholder {
+  color: rgba(250, 244, 232, 0.4) !important;
+}
+
+.wellness-view .input-field:focus {
+  border-color: rgba(229, 168, 85, 0.7) !important;
+  box-shadow: 0 0 8px rgba(229, 168, 85, 0.25) !important;
+  outline: none;
+}
+
+/* Table Style Overrides to make it dark-themed and glassmorphic */
+.wellness-view .table-container {
+  background: rgba(10, 24, 16, 0.45) !important;
+  border: 1px solid rgba(143, 172, 142, 0.25) !important;
+  box-shadow: none !important;
+  border-radius: 12px;
+}
+
+.wellness-view th {
+  background: rgba(143, 172, 142, 0.15) !important;
+  color: var(--text-bark) !important;
+  border-bottom: 1.5px solid rgba(143, 172, 142, 0.3) !important;
+}
+
+.wellness-view td {
+  color: var(--ivory) !important;
+  border-bottom: 1px solid rgba(143, 172, 142, 0.15) !important;
+}
+
+.wellness-view tr:hover td {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Earthy Custom Mood Picker Buttons */
+.mood-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 0.75rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: var(--text-dim);
+}
+
+.mood-btn svg {
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+.mood-btn span {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.mood-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(143, 172, 142, 0.4);
+  transform: scale(1.06) translateY(-2px);
+  color: var(--text-main);
+}
+
+.mood-btn:hover svg {
+  transform: scale(1.15);
+}
+
+.mood-btn.selected {
+  background: rgba(143, 172, 142, 0.18);
+  border-color: var(--moss);
+  color: var(--text-main);
+  box-shadow:
+    0 4px 12px rgba(143, 172, 142, 0.15),
+    inset 0 0 10px rgba(143, 172, 142, 0.2);
+}
+
+.mood-btn.selected svg {
+  transform: scale(1.22);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.25));
+}
+
+/* Water Spill Droplets Overflow Animations */
+.spill-droplet {
+  position: absolute;
+  width: 7px;
+  height: 11px;
+  background: radial-gradient(circle at 35% 35%, #e0f2fe, #38bdf8, #0284c7);
+  border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.spill-droplet-left-1 {
+  left: 6px;
+  top: 10px;
+  animation: flow-down-left 2.5s infinite linear;
+}
+
+.spill-droplet-left-2 {
+  left: 16px;
+  top: 50px;
+  animation: flow-down-left 2s infinite linear 0.8s;
+}
+
+.spill-droplet-right-1 {
+  right: 8px;
+  top: 30px;
+  animation: flow-down-right 2.2s infinite linear 0.4s;
+}
+
+.spill-droplet-right-2 {
+  right: 18px;
+  top: 70px;
+  animation: flow-down-right 2.4s infinite linear 1.2s;
+}
+
+@keyframes flow-down-left {
+  0% {
+    transform: translateY(0) scale(0.4);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(180px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+@keyframes flow-down-right {
+  0% {
+    transform: translateY(0) scale(0.4);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(160px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+/* Ripple overflow overlay on the stem fill */
+.water-stem-fill.overflowing::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: #bae6fd;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(186, 230, 253, 0.85);
+  animation: top-spill-ripple 1.5s infinite ease-in-out;
+}
+
+@keyframes top-spill-ripple {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleY(1.4);
+    opacity: 1;
+  }
+}
+
+/* Petal Nest Dome */
+.petal-nest-dome {
+  position: absolute;
+  bottom: 0;
+  left: 45px;
+  width: 85px;
+  height: 75px;
+  pointer-events: none;
+  z-index: 4;
+  filter: drop-shadow(0 2px 8px rgba(244, 143, 177, 0.45));
+  animation: petal-sway 4s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+
+@keyframes petal-sway {
+  0% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
+}
+
+/* Custom Over-hydration Completion Message Banner */
+.cozy-hydration-banner {
+  background: rgba(244, 143, 177, 0.12);
+  border: 1px dashed rgba(244, 143, 177, 0.4);
+  padding: 0.65rem 1rem;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  color: #f48fb1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  box-shadow: 0 0 10px rgba(244, 143, 177, 0.05);
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(244, 143, 177, 0.05);
+    border-color: rgba(244, 143, 177, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(244, 143, 177, 0.15);
+    border-color: rgba(244, 143, 177, 0.6);
+  }
+}
+
+/* ==========================================================================
+   🌅 FOCUS STALK & TIMER REVAMP
+   ========================================================================== */
+
+.main-viewport.main-focus-hub {
+  background: transparent;
+}
+
+.tasks-view {
+  position: relative;
+  isolation: isolate;
+  /* min-height: calc(100vh - 5rem); */
+  --text-main: var(--ivory);
+  --text-muted: #e7cbb2; /* Soft amber/ivory mix */
+  --text-dim: rgba(255, 235, 205, 0.65);
+  --text-bark: var(--ivory-warm);
+  color: var(--text-main);
+}
+
+.tasks-view h1,
+.tasks-view h2,
+.tasks-view h3,
+.tasks-view h4,
+.tasks-view label {
+  color: var(--text-main);
+}
+
+.tasks-view .focus-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tasks-view > .view-header,
+.tasks-view > .tasks-grid {
+  position: relative;
+  z-index: 1;
+}
+
+/* Card Highlight Default States - Locked highlights as default state */
+.tasks-view .pebble-panel-1 {
+  background: rgba(43, 17, 44, 0.65) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(244, 162, 97, 0.65) !important; /* Glowing sunset orange */
+  border-radius: 45px 85px 55px 75px / 50px 65px 75px 85px !important;
+  transform: translateY(-5px) scale(1.015) rotate(0.4deg) !important;
+  box-shadow:
+    0 15px 35px rgba(92, 26, 50, 0.35),
+    0 15px 35px rgba(244, 162, 97, 0.22),
+    inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
+}
+
+.tasks-view .pebble-panel-2 {
+  background: rgba(43, 17, 44, 0.65) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(251, 191, 36, 0.55) !important; /* Glowing gold/amber */
+  border-radius: 75px 50px 85px 60px / 65px 75px 55px 80px !important;
+  transform: translateY(-5px) scale(1.015) rotate(-0.4deg) !important;
+  box-shadow:
+    0 15px 35px rgba(92, 26, 50, 0.35),
+    0 15px 35px rgba(251, 191, 36, 0.18),
+    inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Maintain identical layout on hover to disable hover changes */
+.tasks-view .pebble-panel-1:hover {
+  transform: translateY(-5px) scale(1.015) rotate(0.4deg) !important;
+  box-shadow:
+    0 15px 35px rgba(92, 26, 50, 0.35),
+    0 15px 35px rgba(244, 162, 97, 0.22),
+    inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(244, 162, 97, 0.65) !important;
+}
+
+.tasks-view .pebble-panel-2:hover {
+  transform: translateY(-5px) scale(1.015) rotate(-0.4deg) !important;
+  box-shadow:
+    0 15px 35px rgba(92, 26, 50, 0.35),
+    0 15px 35px rgba(251, 191, 36, 0.18),
+    inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(251, 191, 36, 0.55) !important;
+}
+
+.tasks-view .pebble-panel-1::before,
+.tasks-view .pebble-panel-2::before {
+  opacity: 0.35 !important;
+  transform: rotate(10deg) scale(1.15) !important;
+  transition: none !important;
+}
+
+/* Text color and contrast styling across all items on the page */
+.tasks-view h2 {
+  color: #fff3b0 !important; /* Soft sun yellow */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.tasks-view .view-header p {
+  color: #ffe8d6 !important; /* Soft ivory peach */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+
+.tasks-view .panel-title {
+  color: #ffd166 !important; /* Golden/amber panels title */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+  font-family: var(--font-title);
+  font-weight: 700;
+}
+
+.tasks-view p {
+  color: #ffe8d6 !important;
+}
+
+.tasks-view .todo-label {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.tasks-view .todo-item {
+  background: rgba(30, 10, 31, 0.25) !important;
+  border: 1.5px solid rgba(244, 162, 97, 0.15) !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1rem !important;
+  margin-bottom: 0.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tasks-view .todo-item:hover {
+  background: rgba(30, 10, 31, 0.4) !important;
+  border-color: rgba(244, 162, 97, 0.3) !important;
+}
+
+/* Filter buttons */
+.tasks-view .filter-btn {
+  background: rgba(92, 26, 50, 0.35) !important;
+  color: #e7cbb2 !important;
+  border: 1px solid rgba(244, 162, 97, 0.25) !important;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.2s ease;
+}
+
+.tasks-view .filter-btn:hover {
+  background: rgba(92, 26, 50, 0.5) !important;
+  color: #ffffff !important;
+  border-color: rgba(244, 162, 97, 0.5) !important;
+}
+
+.tasks-view .filter-btn.active {
+  background: rgba(210, 88, 22, 0.85) !important;
+  color: #ffffff !important;
+  border-color: #f4a261 !important;
+  box-shadow: 0 0 8px rgba(244, 162, 97, 0.3) !important;
+}
+
+/* Input Fields */
+.tasks-view .input-field {
+  background: rgba(30, 10, 31, 0.4) !important;
+  border: 1.5px solid rgba(244, 162, 97, 0.35) !important;
+  color: #ffffff !important;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+}
+
+.tasks-view .input-field::placeholder {
+  color: rgba(255, 235, 205, 0.4) !important;
+}
+
+.tasks-view .input-field:focus {
+  border-color: rgba(244, 162, 97, 0.7) !important;
+  box-shadow: 0 0 8px rgba(244, 162, 97, 0.3) !important;
+  outline: none;
+}
+
+/* Leaf Checkboxes */
+.todo-leaf-wrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.todo-leaf-wrapper:hover {
+  transform: scale(1.15) rotate(-5deg);
+}
+.todo-item.completed .todo-leaf-wrapper {
+  transform: scale(0.9) rotate(15deg);
+  opacity: 0.8;
+}
+
+/* Sweeping Animation to Compost Bin */
+.todo-item {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: left center;
+}
+.todo-item.sweeping {
+  transform: translateX(150%) scale(0.3) rotate(60deg) !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Wicker/Wood Slat Compost Bin Design */
+.tasks-view .compost-bin-container {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 70px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: visible;
+  z-index: 10;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tasks-view .compost-bin-container:hover {
+  transform: scale(1.08);
+}
+
+.tasks-view .compost-bin-container.full:hover {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+/* Lid of the Bin */
+.tasks-view .compost-bin-lid {
+  width: 66px;
+  height: 8px;
+  background: #5d4037;
+  border-radius: 4px;
+  border: 1.5px solid #3e2723;
+  margin-bottom: 2px;
+  transition: transform 0.3s ease;
+  transform-origin: left bottom;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* When full, the lid is slightly popped open/tilted! */
+.tasks-view .compost-bin-container.full .compost-bin-lid {
+  transform: rotate(-15deg) translateY(-2px);
+}
+
+/* Bin Body */
+.tasks-view .compost-bin-body {
+  width: 60px;
+  height: 65px;
+  background: #4e342e; /* Dark wood base */
+  border: 2px solid #3e2723;
+  border-radius: 4px 4px 10px 10px;
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.5),
+    0 8px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 4px 0;
+  overflow: visible;
+}
+
+/* Wooden slats overlaying the body */
+.tasks-view .bin-slat {
+  width: 100%;
+  height: 8px;
+  background: #6d4c41;
+  border-top: 1px solid #8d6e63;
+  border-bottom: 1px solid #3e2723;
+  opacity: 0.95;
+}
+
+/* Leaves overflowing from inside */
+.tasks-view .bin-overflow-leaves {
+  position: absolute;
+  top: -12px;
+  left: 5px;
+  right: 5px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tasks-view .bin-leaf {
+  position: absolute;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+  animation: float-leaf 3s infinite ease-in-out alternate;
+}
+
+.tasks-view .leaf-1 {
+  left: 6px;
+  top: -2px;
+  --rot: -25deg;
+  transform: rotate(-25deg);
+  animation-delay: 0.2s;
+}
+
+.tasks-view .leaf-2 {
+  right: 8px;
+  top: -4px;
+  --rot: 35deg;
+  transform: rotate(35deg);
+  animation-delay: 0.5s;
+}
+
+.tasks-view .leaf-3 {
+  left: 20px;
+  top: -6px;
+  --rot: 5deg;
+  transform: rotate(5deg);
+}
+
+@keyframes float-leaf {
+  0% {
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+  100% {
+    transform: translateY(-3px) rotate(calc(var(--rot, 0deg) + 6deg));
+  }
+}
+
+/* Scattered leaves at the base of the bin */
+.tasks-view .compost-bin-foot-leaves {
+  position: absolute;
+  bottom: -6px;
+  left: -20px;
+  right: -20px;
+  height: 20px;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+}
+
+.tasks-view .foot-leaf {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.tasks-view .f-leaf-1 {
+  transform: translate(-8px, 6px) rotate(45deg);
+}
+.tasks-view .f-leaf-2 {
+  transform: translate(4px, 5px) rotate(-30deg);
+}
+.tasks-view .f-leaf-3 {
+  transform: translate(-1px, 8px) rotate(85deg);
+}
+.tasks-view .f-leaf-4 {
+  transform: translate(10px, 4px) rotate(-70deg);
+}
+
+/* ==========================================================================
+   🦋 COCOON REFLECTIONS — Journal View
+   ========================================================================== */
+
+.journal-view {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+
+  /* Fairy forest dark palette */
+  --text-main: #f0e6ff;
+  --text-muted: #d8c4f4;
+  --text-dim: rgba(224, 196, 255, 0.6);
+  --border-color: rgba(196, 181, 253, 0.25);
+  color: var(--text-main);
+}
+
+/* Backdrop covers full view-section */
+.journal-view .cocoon-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* All content sits above backdrop */
+.journal-view > .cocoon-page {
+  position: relative;
+  z-index: 1;
+}
+
+/* Also ensure the CaterpillarJournal itself propagates z-index correctly */
+.journal-view > .ambientbeetle-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* The nested view-section should not be double-stacked */
+.journal-view .view-section.cocoon-page {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  padding-top: 0;
+  min-height: unset;
+}
+
+/* Text colors */
+.journal-view h2,
+.journal-view h1 {
+  color: #e9d5ff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+.journal-view h3,
+.journal-view h4,
+.journal-view .panel-title {
+  color: #c4b5fd !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.journal-view p,
+.journal-view label,
+.journal-view .view-header p {
+  color: #e9d5ff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.journal-view .journal-body {
+  color: #d8c4f4 !important;
+}
+
+/* ── Page header: caterpillar crawl banner ── */
+.cocoon-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.cocoon-header-caterpillar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(30, 15, 60, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  border-radius: 20px;
+  padding: 0.6rem 1.2rem;
+  max-width: max-content;
+}
+
+.cocoon-speech-text {
+  font-size: 0.88rem;
+  color: #e9d5ff !important;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+  margin: 0;
+}
+
+/* ── Cards: transparent glassmorphic fairy theme ── */
+.journal-view .cocoon-card,
+.journal-view .glass.journal-editor-card,
+.journal-view .glass.journal-card {
+  background: rgba(18, 8, 45, 0.52) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(196, 181, 253, 0.3) !important;
+  border-radius: 50px 80px 55px 75px / 55px 65px 75px 60px !important;
+  transform: translateY(-4px) scale(1.012) rotate(0.3deg) !important;
+  box-shadow:
+    0 12px 32px rgba(10, 5, 30, 0.45),
+    0 0 24px rgba(196, 181, 253, 0.12),
+    inset 0 0 18px rgba(255, 255, 255, 0.06) !important;
+  transition: none !important;
+  padding: 2.2rem 2.5rem !important;
+}
+
+.journal-view .glass.journal-editor-card {
+  border-radius: 75px 50px 80px 55px / 60px 75px 55px 80px !important;
+  transform: translateY(-4px) scale(1.012) rotate(-0.3deg) !important;
+}
+
+/* Disable hover changes */
+.journal-view .cocoon-card:hover,
+.journal-view .glass.journal-editor-card:hover,
+.journal-view .glass.journal-card:hover {
+  transform: translateY(-4px) scale(1.012) rotate(0.3deg) !important;
+  box-shadow:
+    0 12px 32px rgba(10, 5, 30, 0.45),
+    0 0 24px rgba(196, 181, 253, 0.12),
+    inset 0 0 18px rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(196, 181, 253, 0.3) !important;
+}
+
+.journal-view .glass.journal-editor-card:hover {
+  transform: translateY(-4px) scale(1.012) rotate(-0.3deg) !important;
+}
+
+/* ::before shimmer disabled */
+.journal-view .cocoon-card::before,
+.journal-view .glass.journal-editor-card::before,
+.journal-view .glass.journal-card::before {
+  opacity: 0.2 !important;
+  transform: rotate(10deg) scale(1.15) !important;
+  transition: none !important;
+}
+
+/* Input fields */
+.journal-view .input-field {
+  background: rgba(18, 8, 50, 0.6) !important;
+  border: 1px solid rgba(196, 181, 253, 0.35) !important;
+  color: #f0e6ff !important;
+}
+
+.journal-view .input-field::placeholder {
+  color: rgba(196, 181, 253, 0.5) !important;
+}
+
+.journal-view .input-field:focus {
+  border-color: rgba(196, 181, 253, 0.7) !important;
+  box-shadow: 0 0 10px rgba(196, 181, 253, 0.2) !important;
+}
+
+/* Buttons */
+.journal-view .btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4) !important;
+}
+
+.journal-view .btn-secondary {
+  background: rgba(196, 181, 253, 0.12) !important;
+  border: 1px solid rgba(196, 181, 253, 0.35) !important;
+  color: #c4b5fd !important;
+}
+
+/* Journal date stamp */
+.journal-view .journal-date {
+  color: #c4b5fd !important;
+}
+
+/* Logs container */
+.journal-view .journal-logs-container {
+  scrollbar-color: rgba(196, 181, 253, 0.3) transparent;
+}
